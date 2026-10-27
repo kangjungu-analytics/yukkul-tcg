@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171a2d">
+  <meta name="description" content="포켓몬·원피스 카드 시세 검색과 가격 기록을 한 곳에서.">
+  <title>유꿀 TCG | 카드 시세 탐정</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top"><span class="brand-mark">Y</span>유꿀 <b>TCG</b></a>
+    <a class="top-link" href="#saved">내 관심 카드 <span id="saved-count">0</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div><span class="eyebrow">CARD PRICE HUNTER</span><h1>내 최애 카드,<br><em>얼마인지 찾아볼까?</em></h1><p>판매처를 비교하고, 찾은 가격을 기록해요.</p></div>
+      <div class="stamp" aria-hidden="true"><b>TCG</b><strong>✦</strong><small>SEARCH!</small></div>
+    </section>
+
+    <section class="panel">
+      <div class="heading"><div><span class="step">01</span><h2>어떤 카드를 찾을까요?</h2></div><small>카드 이름이나 번호를 입력해 주세요</small></div>
+      <div class="game-picker" role="group" aria-label="카드 게임 선택">
+        <button class="game-button active" data-game="포켓몬 카드" type="button">⚡ 포켓몬</button>
+        <button class="game-button" data-game="원피스 카드" type="button">☠️ 원피스</button>
+      </div>
+      <form id="search-form" class="search-form">
+        <label class="field name-field"><span>카드 이름 또는 번호</span><input id="card-name" placeholder="예: 피카츄 ex, OP01-001" required></label>
+        <label class="field"><span>카드 언어</span><select id="card-language"><option>한국판</option><option>일본판</option><option>영문판</option></select></label>
+        <button class="primary-button" type="submit">카드 찾기 <span>→</span></button>
+      </form>
+      <div id="results" class="results hidden" aria-live="polite">
+        <div class="heading results-heading"><div><span class="step">02</span><h2>판매처에서 찾아보기</h2></div><button id="save-search" class="save-button" type="button">☆ 관심 카드 저장</button></div>
+        <p id="query-preview" class="query-preview"></p>
+        <div id="market-links" class="market-grid"></div>
+        <p class="notice">판매처 검색 결과를 새 창으로 엽니다. 카드 언어·상태·판매 완료 여부에 따라 가격이 다르니 직접 확인해 주세요.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="heading"><div><span class="step">03</span><h2>찾은 가격 기록하기</h2></div><small>검색해서 찾은 가격을 내 브라우저에 저장해요</small></div>
+      <form id="price-form" class="price-form">
+        <label class="field card-field"><span>카드</span><input id="price-card" placeholder="먼저 위에서 카드를 검색해 주세요" required></label>
+        <label class="field"><span>찾은 가격 (원)</span><input id="price-value" type="number" min="0" step="100" placeholder="예: 12000" required></label>
+        <label class="field"><span>확인한 곳</span><select id="price-source"><option>네이버</option><option>번개장터</option><option>직접 확인</option></select></label>
+        <button class="primary-button" type="submit">기록 저장</button>
+      </form>
+      <div id="price-log-list" class="price-log-list"></div>
+      <p class="notice">가격 기록은 지금 사용 중인 브라우저에만 저장돼요. 다른 기기와 공유되지는 않습니다.</p>
+    </section>
+
+    <section class="panel" id="saved">
+      <div class="heading"><div><span class="step">04</span><h2>내 관심 카드</h2></div><button id="clear-saved" class="text-button" type="button">전체 지우기</button></div>
+      <div id="saved-list" class="saved-list"></div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#top"><span class="brand-mark">Y</span>유꿀 <b>TCG</b></a><p>카드 팬을 위한 무료 검색·기록 도구 · 비공식 팬 프로젝트</p><small>포켓몬·원피스 및 카드 상표는 각 권리자에게 속합니다. 유꿀 TCG는 각 권리자와 제휴하지 않습니다.</small></footer>
+  <script src="script.js"></script>
+</body>
+</html>
