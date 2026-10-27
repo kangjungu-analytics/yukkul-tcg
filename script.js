@@ -3,7 +3,8 @@ const searchForm=document.querySelector('#search-form');
 const nameInput=document.querySelector('#card-name');
 const languageInput=document.querySelector('#card-language');
 const results=document.querySelector('#results');
-const linksBox=document.querySelector('#market-links');
+const naverFrame=document.querySelector('#naver-frame');
+const openNaver=document.querySelector('#open-naver');
 const savedKey='yukkul-tcg-saved-v1';
 const logKey='yukkul-tcg-price-log-v1';
 let selectedGame='포켓몬 카드';
@@ -28,21 +29,16 @@ searchForm.addEventListener('submit',event=>{
   currentCard={game:selectedGame,name,language:languageInput.value,label:`${selectedGame} · ${name} · ${languageInput.value}`};
   document.querySelector('#price-card').value=currentCard.label;
   document.querySelector('#query-preview').innerHTML=`검색어: <strong>${safe(currentCard.label)}</strong>`;
-  drawLinks();
+  searchNaver();
   results.classList.remove('hidden');
   results.scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 
-function drawLinks(){
-  const phrase=`${currentCard.name} ${currentCard.game} ${currentCard.language} 카드 시세`;
-  const q=encodeURIComponent(phrase);
-  const markets=[
-    {name:'네이버 검색',desc:'쇼핑·카페·웹 검색 결과',icon:'🔎',url:`https://search.naver.com/search.naver?query=${q}`},
-    {name:'번개장터',desc:'중고 판매글 검색',icon:'⚡',url:`https://m.bunjang.co.kr/search/products?q=${encodeURIComponent(`${currentCard.name} ${currentCard.language}`)}`},
-    {name:'구글 검색',desc:'카드샵과 커뮤니티 검색',icon:'🌐',url:`https://www.google.com/search?q=${q}`},
-    {name:'일본 매물 검색',desc:'일본어 카드명 검색',icon:'🇯🇵',url:`https://www.google.com/search?q=${encodeURIComponent(`${currentCard.name} ${currentCard.game} カード メルカリ`)}`}
-  ];
-  linksBox.innerHTML=markets.map(m=>`<a class="market-card" href="${m.url}" target="_blank" rel="noopener noreferrer"><span class="market-title"><span class="market-icon">${m.icon}</span><span><span class="market-name">${m.name}</span><span class="market-desc">${m.desc}</span></span></span><span class="market-arrow">↗</span></a>`).join('');
+function searchNaver(){
+  const phrase=`${currentCard.name} ${currentCard.game} ${currentCard.language} 카드`;
+  const url=`https://search.naver.com/search.naver?where=nexearch&query=${encodeURIComponent(phrase)}`;
+  naverFrame.src=url;
+  openNaver.href=url;
 }
 
 document.querySelector('#save-search').addEventListener('click',()=>{
